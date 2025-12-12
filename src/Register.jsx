@@ -2,6 +2,8 @@ import './Register.css'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { userContext } from './App'
+import { useContext } from 'react'
 
 function Register() {
 
@@ -10,6 +12,7 @@ function Register() {
     const [error, setError] = useState(false)
     const [found, setFound] = useState(false)
     const navigate = useNavigate()
+    const { setUser } = useContext(userContext)
 
     const [users, setUsers] = useState([])
     useEffect(() => {
@@ -43,6 +46,7 @@ function Register() {
             }
             else {
                 alert("User registered successfully")
+                setUser(user)
                 navigate("/Display")
             }
         }
