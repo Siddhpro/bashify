@@ -1,21 +1,21 @@
-import { useState } from "react"
 import './Home.css'
 import { useNavigate } from "react-router-dom"
 function Home() {
 
-    const [playlist, setPlaylist] = useState(false)
     const navigate = useNavigate()
 
-    function handleStart() {
-        setPlaylist(true)
-        navigate('/Display')
+    function handleLogin() {
+        navigate('/login')
+    }
+    function handleRegister() {
+        navigate('/register')
     }
     return (
         <div>
             <h1>Bashify</h1>
             <p>Curate your Playlist</p>
-            <button onClick={handleStart}>Start</button>
-            {playlist && <p>Entering playlist mode...</p>}
+            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleRegister}>Register</button>
         </div>
     )
 }
