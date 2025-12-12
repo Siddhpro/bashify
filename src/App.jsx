@@ -1,22 +1,40 @@
-import { useState } from 'react'
+import { StrictMode, useState, createContext } from 'react'
 import './App.css'
 import Home from './Home'
 import Login from './Login'
 import Register from './Register'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
 import Display from './Display'
 
+export const userContext = createContext();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />
+  },
+  {
+    path: "/display",
+    element: <Display />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/register",
+    element: <Register />
+  }
+])
 
 function App() {
+  const [user, setUser] = useState(null);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/display" element={<Display />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+    <StrictMode>
+      <userContext.Provider value={{ user, setUser }}>
+        <RouterProvider router={router} />
+      </userContext.Provider>
+    </StrictMode>
   )
 }
 

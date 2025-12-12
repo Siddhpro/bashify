@@ -1,6 +1,7 @@
 import './Login.css'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { userContext } from './App'
 
 function Login() {
 
@@ -8,6 +9,7 @@ function Login() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState(false)
     const navigate = useNavigate()
+    const { setUser } = useContext(userContext)
 
     async function handleLogin(e) {
         e.preventDefault()
@@ -17,6 +19,7 @@ function Login() {
             const user = data.find(user => user.username === username && user.password === password)
             if (user) {
                 setError(false)
+                setUser(user)
                 navigate("/display")
             }
             else {
